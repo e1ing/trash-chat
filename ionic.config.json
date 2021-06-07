@@ -1,0 +1,7 @@
+{
+  "name": "myApp_kazan",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
