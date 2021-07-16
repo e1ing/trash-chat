@@ -29,15 +29,36 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import {useState} from 'react';
+import {FormEvent, FormEventHandler, useEffect, useState} from 'react';
+
+type ResponseType = {
+    message: string,
+    photo: string,
+    userId: number,
+    userName: string
+}
 
 function App() {
+    const [mesageText, setMessageText] = useState("")
+    const [ws, setWS] = useState<null | WebSocket>(null)
+    let [users, setUsers] = useState<ResponseType[]>([{userId: 1, userName: 'Elya', photo: "", message: "yoyy"}])
 
-    let [message, setMessage] = useState()
+    useEffect(() => {
+        let localWS = new WebSocket("wss://social-network.samuraijs.com/handlers/ChatHandler.ashx")
 
-    let sendMessage = () => {
-        alert('Hey!')
-    }
+        localWS.onmessage = (messageEvent) => {
+            let messages = JSON.parse(messageEvent.data)
+            console.log(messageEvent)
+            setUsers(messages)
+        }
+        setWS(localWS);
+    }, [])
+
+    //@ts-ignore
+    let onMessageChange = (e) => setMessageText(e.currentTarget.value)
+
+    let sendMessage = () => ws && ws.send(mesageText)
+
 
     return (
         <IonPage>
@@ -46,16 +67,21 @@ function App() {
                 <IonItemDivider>
 
                     <IonGrid>
-                        <IonRow>
-                            <IonCol className={'message'}>
-                                <IonImg  src={''}/>
-                                <b>Elya</b> <span>Hello guys</span>
-                            </IonCol>
+                        <IonRow className={'messages'}>
+                            {users.map(u =>
+                                <IonCol className={'message'}>
+                                    <IonImg src={u.photo}/>
+                                    <b>{u.userName}</b>
+                                    <span>{u.message}</span>
+                                </IonCol>
+                            )}
+
                         </IonRow>
                         <IonRow>
                             <IonCol className={'message'}>
-                                <IonImg  src={''}/>
-                                <b>Lena</b> <span>Yo</span>
+                                <IonImg src={''}/>
+                                <b>Lena</b>
+                                <span>Yo</span>
                             </IonCol>
                         </IonRow>
                     </IonGrid>
@@ -63,13 +89,14 @@ function App() {
                 </IonItemDivider>
                 <IonLabel className={'footer'}>
                 </IonLabel>
-                <IonTextarea color={'tertiary'}>{message}</IonTextarea>
+                <IonTextarea onChange={onMessageChange} color={'tertiary'}>{mesageText}</IonTextarea>
                 <IonButton onClick={sendMessage}>Send</IonButton>
 
             </IonContent>
         </IonPage>
     )
 }
+
 
 
 /*const App: React.FC = () => (
