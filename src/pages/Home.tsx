@@ -1,4 +1,4 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import {IonContent, IonHeader, IonItem, IonLabel, IonList, IonMenu, IonPage, IonTitle, IonToolbar} from '@ionic/react';
 import ExploreContainer from '../components/ExploreContainer';
 import './Home.css';
 
@@ -7,19 +7,21 @@ const Home: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Blank</IonTitle>
+          <IonTitle>Развитие детского здравоохранения, включая создание современной инфраструктуры оказания медицинской помощи</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">Blank</IonTitle>
+              <IonLabel color="light">Light Label</IonLabel><br />
           </IonToolbar>
         </IonHeader>
         <ExploreContainer />
       </IonContent>
     </IonPage>
-  );
-};
+
+
+
+)};
 
 export default Home;

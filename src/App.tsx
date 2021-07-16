@@ -1,7 +1,15 @@
-import { Redirect, Route } from 'react-router-dom';
-import { IonApp, IonRouterOutlet } from '@ionic/react';
-import { IonReactRouter } from '@ionic/react-router';
-import Home from './pages/Home';
+import {
+    IonButton,
+    IonCol,
+    IonContent,
+    IonGrid,
+    IonImg,
+    IonItemDivider,
+    IonLabel,
+    IonPage,
+    IonRow,
+    IonTextarea
+} from '@ionic/react';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -21,8 +29,50 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import {useState} from 'react';
 
-const App: React.FC = () => (
+function App() {
+
+    let [message, setMessage] = useState()
+
+    let sendMessage = () => {
+        alert('Hey!')
+    }
+
+    return (
+        <IonPage>
+            <IonContent>
+
+                <IonItemDivider>
+
+                    <IonGrid>
+                        <IonRow>
+                            <IonCol className={'message'}>
+                                <IonImg  src={''}/>
+                                <b>Elya</b> <span>Hello guys</span>
+                            </IonCol>
+                        </IonRow>
+                        <IonRow>
+                            <IonCol className={'message'}>
+                                <IonImg  src={''}/>
+                                <b>Lena</b> <span>Yo</span>
+                            </IonCol>
+                        </IonRow>
+                    </IonGrid>
+
+                </IonItemDivider>
+                <IonLabel className={'footer'}>
+                </IonLabel>
+                <IonTextarea color={'tertiary'}>{message}</IonTextarea>
+                <IonButton onClick={sendMessage}>Send</IonButton>
+
+            </IonContent>
+        </IonPage>
+    )
+}
+
+
+/*const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
       <IonRouterOutlet>
@@ -35,6 +85,6 @@ const App: React.FC = () => (
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
-);
+);*/
 
 export default App;
