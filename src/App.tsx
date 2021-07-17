@@ -4,8 +4,10 @@ import {
     IonContent,
     IonGrid,
     IonImg,
+    IonItem,
     IonItemDivider,
     IonLabel,
+    IonList,
     IonPage,
     IonRow,
     IonTextarea
@@ -64,31 +66,16 @@ function App() {
         <IonPage>
             <IonContent>
 
-                <IonItemDivider>
-
-                    <IonGrid>
-                        <IonRow className={'messages'}>
-                            {users.map(u =>
-                                <IonCol className={'message'}>
-                                    <IonImg src={u.photo}/>
-                                    <b>{u.userName}</b>
-                                    <span>{u.message}</span>
-                                </IonCol>
-                            )}
-
-                        </IonRow>
-                        <IonRow>
-                            <IonCol className={'message'}>
-                                <IonImg src={''}/>
-                                <b>Lena</b>
-                                <span>Yo</span>
-                            </IonCol>
-                        </IonRow>
-                    </IonGrid>
-
-                </IonItemDivider>
-                <IonLabel className={'footer'}>
-                </IonLabel>
+                <IonList>
+                    {users.map(u =>
+                        <IonItem>
+                            <IonImg src={u.photo}/>
+                            <IonLabel>{u.userName}</IonLabel>
+                            <IonLabel>{u.message}</IonLabel>
+                        </IonItem>
+                    )}
+                </IonList>
+                <IonLabel className={'footer'}> </IonLabel>
                 <IonTextarea onChange={onMessageChange} color={'tertiary'}>{mesageText}</IonTextarea>
                 <IonButton onClick={sendMessage}>Send</IonButton>
 
@@ -96,7 +83,6 @@ function App() {
         </IonPage>
     )
 }
-
 
 
 /*const App: React.FC = () => (
